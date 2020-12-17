@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mail import Mail
 from flask_mail import Message  
 import os
@@ -9,29 +9,31 @@ app.config['MAIL_PORT'] = int(os.environ.get('MAIL_PORT') or 25)
 app.config['MAIL_USE_TLS'] = os.environ.get('MAIL_USE_TLS') is not None
 app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') or 'Super-Secret-Super-Key-123'
 
 mail = Mail(app)
 
+
 @app.route('/')
-def home():
-    return render_template('index.html')
-
-
-@app.route('/<string:page_name>')
-def html_page(page_name):
-    return render_template(page_name)
+def index():
+    return render_template("index.html")
 
 
 @app.route('/contact_form', methods=['POST', 'GET'])
 def contact_form():
     if request.method == "POST":
         data = request.form.to_dict()
-        msg = Message("New message from your Portfolio website", 
+        title = "New message from your Portfolio website"
+        name = data.get('Name') or "Anonymous"
+        email = data.get('email')
+        message = data.get('message') or "Message was empty"
+        msg = Message(title, 
                        sender="maksim.buturlakin@gmail.com",
                        recipients=["maksim.buturlakin@gmail.com",])
-        msg.body=data['name'] + ' wrote to you: \n' + data['message'] + \
-        '\nEMAIL WAS ' + data['email']
+        msg.body = name + ' wrote to you: \n' + message + \
+        '\nemail was ' + email
         mail.send(msg)
-        return redirect('/')
+        flash('Your message was sent!')
+        return redirect(url_for('index'))
     else:
         return 'Something went wrong'

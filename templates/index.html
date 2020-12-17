@@ -10,6 +10,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="./static/assets/css/main.css" />
+		<link rel="stylesheet" href="./static/assets/css/styles.css" />
 		<link rel="apple-touch-icon" sizes="180x180" href="./static/images/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="./static/images/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="./static/images/favicon-16x16.png">
@@ -45,6 +46,7 @@
 					<!-- Social Icons -->
 						<ul class="icons">
 							<li><a href="https://github.com/skvozio" class="icon brands fa-github"><span class="label">Github</span></a></li>
+							<li><a href="https://github.com/skvozio" class="icon brands fa-linkedin"><span class="label">Github</span></a></li>
 							<li><a href="mailto:maksim.buturlakin@gmail.com" class="icon solid fa-envelope"><span class="label">Send email</span></a></li>
 						</ul>
 
@@ -54,7 +56,17 @@
 
 		<!-- Main -->
 			<div id="main">
-
+				
+					{% with messages = get_flashed_messages() %}
+						{% if messages %}
+						<div class="messages">
+							{% for message in messages %}
+								<span class="message">{{ message }}</span>
+							{% endfor %}
+						</div>
+						{% endif %}
+					{% endwith %}
+				
 				<!-- Intro -->
 					<section id="top" class="one dark cover">
 						<div class="container">
@@ -169,10 +181,10 @@
 
 							<form method="post" action="contact_form" method="post">
 								<div class="row">
-									<div class="col-6 col-12-mobile"><input type="text" name="name" placeholder="Name" /></div>
-									<div class="col-6 col-12-mobile"><input type="text" name="email" placeholder="Email" required/></div>
+									<div class="col-6 col-12-mobile"><input type="text" name="name" placeholder="Name*" required/></div>
+									<div class="col-6 col-12-mobile"><input type="email" name="email" placeholder="Email*" required/></div>
 									<div class="col-12">
-										<textarea name="message" placeholder="Message"></textarea>
+										<textarea name="message" placeholder="Message*" required></textarea>
 									</div>
 									<div class="col-12">
 										<input type="submit" value="Send Message" />
@@ -196,13 +208,13 @@
 			</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src="./static/assets/js/jquery.min.js"></script>
+			<script src="./static/assets/js/jquery.scrolly.min.js"></script>
+			<script src="./static/assets/js/jquery.scrollex.min.js"></script>
+			<script src="./static/assets/js/browser.min.js"></script>
+			<script src="./static/assets/js/breakpoints.min.js"></script>
+			<script src="./static/assets/js/util.js"></script>
+			<script src="./static/assets/js/main.js"></script>
 
 	</body>
 </html>

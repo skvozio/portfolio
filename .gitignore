@@ -1,0 +1,5 @@
+.venv
+__pycache__/
+index.html
+old_static/
+univers/

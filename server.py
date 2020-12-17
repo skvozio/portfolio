@@ -24,7 +24,7 @@ def contact_form():
     if request.method == "POST":
         data = request.form.to_dict()
         title = "New message from your Portfolio website"
-        name = data.get('Name') or "Anonymous"
+        name = data.get('name') or "Anonymous"
         email = data.get('email')
         message = data.get('message') or "Message was empty"
         msg = Message(title, 

@@ -29,7 +29,7 @@ def contact_form():
         message = data.get('message') or "Message was empty"
         msg = Message(title, 
                        sender="buturlakin.portfolio@yandex.ru",
-                       recipients=["maksim.buturlakin@gmail.com",])
+                       recipients=["buturlakin.portfolio@yandex.ru",])
         msg.body = name + ' wrote to you: \n' + message + \
         '\nemail was ' + email
         mail.send(msg)
